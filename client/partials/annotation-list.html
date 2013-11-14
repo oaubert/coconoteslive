@@ -1,0 +1,28 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Live Annotation</h1>
+    </div>
+</div>
+<div class="entry-bar">
+  <form ng-submit="submit()">
+    <input ng-model="annotation" type="text" value="" placeholder="Entrez votre commentaire" class="topcoat-text-input--large" ng-keydown="reset_begin_timestamp()">
+    <input ng-model="begin_timestamp" type="hidden" value="">
+    <br>
+  </form>
+  <input title="Question" class="category question"   ng-click="submit('question')" type="submit" value="??">
+  <input title="Référence" class="category reference" ng-click="submit('reference')" type="submit" value="==">
+  <input title="Accord" class="category agree"        ng-click="submit('agree')" type="submit" value="++">
+  <input title="Désaccord" class="category disagree"  ng-click="submit('disagree')" type="submit" value="--">
+
+</div>
+<div class="topcoat-list__container scroller">
+    <ul class="topcoat-list list">
+        <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item">
+            <a ng-class="annotation.category" href="#/annotations/{{annotation.id}}">
+              {{annotation.data}}<br>
+              (<em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} - {{annotation.end | date:'yyyy-MM-dd HH:mm:ss' }}</em>) @{{annotation.creator}}
+              <span class="chevron"></span>
+            </a>
+        </li>
+    </ul>
+</div>

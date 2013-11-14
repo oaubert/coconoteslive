@@ -1,0 +1,17 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet back-button" href="" ng-click="back()">
+            <span class="topcoat-icon topcoat-icon--back"></span>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">Annotation {{annotation.id}}</h1>
+    </div>
+</div>
+
+<div class='details'>
+    <h1 ng-class="annotation.category">{{annotation.data}}</h1>
+    <h2>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss'}}</h2>
+    <h2>{{annotation.end | date:'yyyy-MM-dd HH:mm:ss'}}</h2>
+    <h2>{{annotation.creator}}</h2>
+</div>
