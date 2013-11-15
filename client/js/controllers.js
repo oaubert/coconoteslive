@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('mla.controllers', [])
-    .controller('AnnotationListCtrl', ['$scope', 'Annotation', function ($scope, Annotation) {
-        $scope.annotations = Annotation.query();
-        
+    .controller('AnnotationListCtrl', ['$scope', 'Annotation', '$interval', function ($scope, Annotation, $interval) {
+        $scope.refresh = function() {
+            $scope.annotations = Annotation.query();
+        };
+
         $scope.submit = function(category) {
             var data = this.annotation;
             var begin = parseInt(this.begin_timestamp, 10) || (new Date()).getTime();
@@ -13,7 +15,7 @@ angular.module('mla.controllers', [])
             Annotation.append(data, begin, end, category, creator);
             this.annotation = "";
             this.begin_timestamp = null;
-            $scope.annotations = Annotation.query();
+            $scope.refresh();
         };
 
         $scope.reset_begin_timestamp = function() {
@@ -21,6 +23,11 @@ angular.module('mla.controllers', [])
                 this.begin_timestamp = (new Date()).getTime();
             }
         };
+
+        $scope.refresh();
+
+        $interval($scope.refresh, 30000);
+
     }])
     .controller('AnnotationDetailCtrl', ['$scope', '$routeParams', 'Annotation', function ($scope, $routeParams, Annotation) {
         $scope.annotation = Annotation.get($routeParams.annotationId);
