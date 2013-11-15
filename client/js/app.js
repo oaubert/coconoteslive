@@ -3,7 +3,7 @@
 angular.module('mla', [
     'ngRoute',
     'mla.controllers',
-    'mla.memoryServices'
+    'mla.restServices'
 ]).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/annotations', {templateUrl: 'partials/annotation-list.html', controller: 'AnnotationListCtrl'});
