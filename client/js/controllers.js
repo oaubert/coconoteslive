@@ -13,6 +13,7 @@ angular.module('mla.controllers', [])
             Annotation.append(data, begin, end, category, creator);
             this.annotation = "";
             this.begin_timestamp = null;
+            $scope.annotations = Annotation.query();
         };
 
         $scope.reset_begin_timestamp = function() {
