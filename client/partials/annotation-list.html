@@ -9,10 +9,10 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>
-  <input title="Question" class="category question"   ng-click="submit('question')" type="submit" value="??">
-  <input title="Référence" class="category reference" ng-click="submit('reference')" type="submit" value="==">
-  <input title="Accord" class="category agree"        ng-click="submit('agree')" type="submit" value="++">
-  <input title="Désaccord" class="category disagree"  ng-click="submit('disagree')" type="submit" value="--">
+  <input title="Simple réflexion" class="category comment"   ng-click="submit('comment')" type="submit" value="Commentaire">
+  <input title="Je me pose une question" class="category question"   ng-click="submit('question')" type="submit" value="??">
+  <input title="Je trouve ce moment passionnant" class="category interested"        ng-click="submit('interested')" type="submit" value=":-)">
+  <input title="Je m'ennuie un peu" class="category bored"  ng-click="submit('bored')" type="submit" value=":-|">
 
 </div>
 <div class="topcoat-list__container scroller">
@@ -20,7 +20,7 @@
         <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item">
             <a ng-class="annotation.category" href="#/annotations/{{annotation.id}}">
               {{annotation.data}}<br>
-              (<em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} - {{annotation.end | date:'yyyy-MM-dd HH:mm:ss' }}</em>) @{{annotation.creator}}
+              <em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}
               <span class="chevron"></span>
             </a>
         </li>
