@@ -8,12 +8,8 @@
     <input ng-model="annotation" type="text" value="" placeholder="Entrez votre commentaire" class="topcoat-text-input--large" ng-keydown="reset_begin_timestamp()">
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
-  </form>
-  <input title="Simple réflexion" class="category comment"   ng-click="submit('comment')" type="submit" value="Commentaire">
-  <input title="Je me pose une question" class="category question"   ng-click="submit('question')" type="submit" value="??">
-  <input title="Je trouve ce moment passionnant" class="category interested"        ng-click="submit('interested')" type="submit" value=":-)">
-  <input title="Je m'ennuie un peu" class="category bored"  ng-click="submit('bored')" type="submit" value=":-|">
-
+  </form>  
+  <input title="Simple réflexion" class="category comment" ng-click="submit('comment')" type="submit" value="Envoyer le commentaire">
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
