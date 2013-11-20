@@ -2,8 +2,10 @@
     position: absolute;
     top: 0px;
     bottom: 0px;
-    left: 0px;
-    right: 0px;
+    left: 5px;
+    right: 5px;
+    max-width: 600px;
+    border: solid 1px grey;
 }
 
 .back-button {
