@@ -2,7 +2,9 @@
     <div class="topcoat-navigation-bar__item center">
       <h1 class="topcoat-navigation-bar__title">Live Annotation</h1>
     </div>
-    <input onclick="this.select();" type="text" class="username" value="Anonyme" ng-model="username"></input>
+    <div class="username">
+      <input onclick="this.select();" type="text" value="Anonyme" ng-model="username"></input> <img alt="" src="css/images/user.svg" width="13" height="13">
+    </div>
 </div>
 <div class="entry-bar">
   <form ng-submit="submit()">

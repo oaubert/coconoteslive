@@ -242,7 +242,7 @@ ul {
     top: 20px;
 }
 
-input.username {
+.username input {
     text-align: right;
     background-color: #e5e9e8;
     border: none;
