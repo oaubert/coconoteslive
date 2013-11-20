@@ -14,11 +14,8 @@
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
         <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item">
-            <a ng-class="annotation.category" href="#/annotations/{{annotation.id}}">
               {{annotation.data}}<br>
               <em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}
-              <span class="chevron"></span>
-            </a>
         </li>
     </ul>
 </div>
