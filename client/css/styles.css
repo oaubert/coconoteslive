@@ -34,7 +34,15 @@
 }
 
 .reference {
-    background-color: #c2ab0f;    
+    background-color: #c2ab0f;
+}
+
+.interested {
+    background-color: #61a447;
+}
+
+.bored {
+    background-color: #c2ab0f;
 }
 
 .question {
