@@ -15,7 +15,6 @@
 
 .scroller {
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
     position: absolute;
     top: 178px;
     bottom: 0px;
