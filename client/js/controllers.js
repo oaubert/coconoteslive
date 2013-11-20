@@ -2,6 +2,7 @@
 
 angular.module('mla.controllers', [])
     .controller('AnnotationListCtrl', ['$scope', 'Annotation', '$interval', function ($scope, Annotation, $interval) {
+        $scope.username = "Anonyme";
         $scope.refresh = function() {
             $scope.annotations = Annotation.query();
         };
@@ -10,7 +11,7 @@ angular.module('mla.controllers', [])
             var data = this.annotation;
             var begin = parseInt(this.begin_timestamp, 10) || (new Date()).getTime();
             var end = (new Date()).getTime();
-            var creator = "Anonymous";
+            var creator = $scope.username;
             
             Annotation.append(data, begin, end, category, creator);
             this.annotation = "";

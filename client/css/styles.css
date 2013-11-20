@@ -235,3 +235,15 @@ ul {
     height: 50px;
     width: 28px;
 }
+
+.username {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+input.username {
+    text-align: right;
+    background-color: #e5e9e8;
+    border: none;
+}
