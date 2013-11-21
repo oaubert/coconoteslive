@@ -8,6 +8,14 @@
     border: solid 1px #ccc;
 }
 
+@media (min-width: 800px) {
+    .main {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 30%;
+    }
+}
 .back-button {
     top: 10px;
     position: absolute;
