@@ -112,7 +112,7 @@ a {
 .list > li {
     position: relative;
     clear: both;
-    padding: 0px;
+    padding: 0px 1em;
     margin: 0px;
 }
 
@@ -246,4 +246,11 @@ ul {
     text-align: right;
     background-color: #e5e9e8;
     border: none;
+}
+
+.annotation-metadata {
+    display: block;
+    text-align: right;
+    width: 100%;
+    font-style: italic;
 }
