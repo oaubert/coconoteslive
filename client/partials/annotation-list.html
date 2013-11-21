@@ -18,7 +18,7 @@
     <ul class="topcoat-list list">
         <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item">
           <span class="annotation-data">{{annotation.data}}</span>
-          <span class="annotation-metadata">{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}</span>
+          <span class="annotation-metadata"><em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}</em></span>
         </li>
     </ul>
 </div>
