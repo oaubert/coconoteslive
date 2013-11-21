@@ -23,7 +23,7 @@ angular.module('mla.controllers', [])
                 category: category,
                 creator: creator                
             });
-            Annotation.append(data, begin, end, category, creator).$then(function (response) { $scope.refresh(); });
+            Annotation.append(data, begin, end, category, creator, function (response) { $scope.refresh() });
         };
 
         $scope.reset_begin_timestamp = function() {
