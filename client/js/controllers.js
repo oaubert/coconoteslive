@@ -2,9 +2,44 @@
 
 angular.module('mla.controllers', [])
     .controller('AnnotationListCtrl', ['$scope', 'Annotation', '$interval', function ($scope, Annotation, $interval) {
+        // Default value
         $scope.username = "Anonyme";
+
         $scope.refresh = function() {
-            $scope.annotations = Annotation.query();
+            Annotation.query().$then( function (response) {
+                var data = response.data;
+
+                if ($scope.annotations && $scope.annotations.length && $scope.annotations[$scope.annotations.length - 1].id === undefined) {
+                    // We just added locally an annotation, so it has no id. See if we can pick it from returned data.
+                    var local = $scope.annotations[$scope.annotations.length - 1];
+                    var remote = data[data.length - 1];
+                    // FIXME: Wrong comparison here, it depends too
+                    // much on datetime str representations. We should
+                    // parse the dates.
+                    if (local.begin === remote.begin && local.end === remote.end && local.data == remote.data) {
+                        // Same annotation. Let's replace the local version with the server-side version
+                        $scope.annotations.pop();
+                        $scope.annotations.push(remote);
+                    }
+                }
+
+                // Let's compare loaded data and local data. If they match, no update is necessary
+                if ($scope.annotations && data.length == $scope.annotations.length) {
+                    var similar = true;
+                    for (var i = data.length - 1 ; i >= 0 ; i--) {
+                        if (data[i].id !== $scope.annotations[i].id) {
+                            similar = false;
+                            break;
+                        }
+                    }
+                    if (! similar) {
+                        $scope.annotations = data;
+                    }
+                } else {
+                    // Different size. Update the whole list
+                    $scope.annotations = data;
+                }
+            });
         };
 
         $scope.submit = function(category) {
