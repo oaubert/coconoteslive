@@ -5,23 +5,20 @@ angular.module('mla.restServices', ['djangoRESTResources'])
                             function (resource, $filter) {
                                 var res = resource('/mla/annotation/:annotationId', {});
                                 
-                                res.append = function (data, begin, end, category, creator, success, error) {
-                                    if (end === undefined)
+                                res.append = function (annotation, success, error) {
+                                    if (annotation.end === undefined)
                                         // FIXME: fetch time from server
                                         end = (new Date()).getTime();
-                                    if (creator === undefined)
+                                    if (annotation.creator === undefined)
                                         creator = 'Anonymous';
-                                    var ann = new res({
-                                        data: data,
-                                        // Encode timestamps in the appropriate input format for the REST framework
-                                        // YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HHMM|-HHMM|Z]"
-                                        begin: $filter('date')(begin, "yyyy-MM-ddTHH:mm:ss.sssZ"),
-                                        end: $filter('date')(end, "yyyy-MM-ddTHH:mm:ss.sssZ"),
-                                        category: category,
-                                        creator: creator
-                                    });
+                                    // Encode timestamps in the appropriate input format for the REST framework
+                                    // YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HHMM|-HHMM|Z]"
+                                    annotation.begin = $filter('date')(annotation.begin, "yyyy-MM-ddTHH:mm:ss.sssZ");
+                                    annotation.end = $filter('date')(annotation.end, "yyyy-MM-ddTHH:mm:ss.sssZ");
+                                    var ann = new res(annotation);
                                     ann.$save({}, success, error);
-                                    return ann;
+                                    return annotation;
+
                                 };
                                 return res;
                             }]);
