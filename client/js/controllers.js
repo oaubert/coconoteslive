@@ -12,18 +12,19 @@ angular.module('mla.controllers', [])
             var begin = parseInt(this.begin_timestamp, 10) || (new Date()).getTime();
             var end = (new Date()).getTime();
             var creator = $scope.username;
-            
             this.annotation = "";
             this.begin_timestamp = null;
+
+            var ann = Annotation.append({ data: data,
+                                          begin: begin,
+                                          end: end,
+                                          category: category || "",
+                                          creator: creator
+                                        }
+                                        ,
+                                        function (response) { $scope.refresh() });
             // Immediately update displayed list (optimistic view, there should be no error)
-            $scope.annotations.push({
-                data: data,
-                begin: begin,
-                end: end,
-                category: category,
-                creator: creator                
-            });
-            Annotation.append(data, begin, end, category, creator, function (response) { $scope.refresh() });
+            $scope.annotations.push(ann);
         };
 
         $scope.reset_begin_timestamp = function() {
