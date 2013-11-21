@@ -59,6 +59,7 @@ angular.module('mla.controllers', [])
                                         ,
                                         function (response) { $scope.refresh() });
             // Immediately update displayed list (optimistic view, there should be no error)
+            ann.uploading = true;
             $scope.annotations.push(ann);
         };
 

@@ -270,3 +270,7 @@ ul {
     font-size: 80%;
     color: #aaa;
 }
+
+.uploading {
+    background-color: #ddd;
+}
