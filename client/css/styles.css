@@ -8,7 +8,7 @@
     border: solid 1px #ccc;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 900px) {
     .main {
         position: absolute;
         top: 0px;
