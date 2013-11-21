@@ -16,6 +16,12 @@
         left: 30%;
     }
 }
+
+/* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
+.topcoat-text-input--large {
+    min-height: 3.4rem;
+}
+
 .back-button {
     top: 10px;
     position: absolute;
