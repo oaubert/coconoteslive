@@ -25,3 +25,7 @@ class Annotation(models.Model):
     category = models.CharField(_('Category'),
                                 max_length=128,
                                 blank=True)
+
+    source = models.CharField(_("Source"),
+                               max_length=128,
+                               blank=True)
