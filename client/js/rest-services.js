@@ -5,7 +5,7 @@ angular.module('mla.restServices', ['djangoRESTResources'])
                             function (resource, $filter) {
                                 var res = resource('/mla/annotation/:annotationId', {});
                                 
-                                res.append = function (data, begin, end, category, creator) {
+                                res.append = function (data, begin, end, category, creator, success, error) {
                                     if (end === undefined)
                                         // FIXME: fetch time from server
                                         end = (new Date()).getTime();
@@ -20,7 +20,8 @@ angular.module('mla.restServices', ['djangoRESTResources'])
                                         category: category,
                                         creator: creator
                                     });
-                                    ann.$save();
+                                    ann.$save({}, success, error);
+                                    return ann;
                                 };
                                 return res;
                             }]);
