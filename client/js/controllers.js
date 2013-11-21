@@ -13,10 +13,17 @@ angular.module('mla.controllers', [])
             var end = (new Date()).getTime();
             var creator = $scope.username;
             
-            Annotation.append(data, begin, end, category, creator);
             this.annotation = "";
             this.begin_timestamp = null;
-            $scope.refresh();
+            // Immediately update displayed list (optimistic view, there should be no error)
+            $scope.annotations.unshift({
+                data: data,
+                begin: begin,
+                end: end,
+                category: category,
+                creator: creator                
+            });
+            Annotation.append(data, begin, end, category, creator).$then(function (response) { $scope.refresh(); });
         };
 
         $scope.reset_begin_timestamp = function() {
