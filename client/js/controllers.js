@@ -16,7 +16,7 @@ angular.module('mla.controllers', [])
             this.annotation = "";
             this.begin_timestamp = null;
             // Immediately update displayed list (optimistic view, there should be no error)
-            $scope.annotations.unshift({
+            $scope.annotations.push({
                 data: data,
                 begin: begin,
                 end: end,
