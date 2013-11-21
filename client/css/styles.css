@@ -238,8 +238,8 @@ ul {
 
 .username {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 1em;
+    top: 1.5em;
 }
 
 .username input {
