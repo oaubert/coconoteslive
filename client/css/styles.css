@@ -5,7 +5,7 @@
     left: 5px;
     right: 5px;
     max-width: 600px;
-    border: solid 1px grey;
+    border: solid 1px #ccc;
 }
 
 .back-button {
