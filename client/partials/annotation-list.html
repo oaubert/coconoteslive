@@ -12,11 +12,13 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>  
-  <input title="Simple réflexion" class="category comment" ng-click="submit('comment')" type="submit" value="Envoyer le commentaire">
+  <input title="Simple réflexion" class="category comment" ng-click="submit('comment')" type="submit" value="Envoyer">
+  <input title="Question" class="category question" ng-click="submit('question')" type="submit" value="Question">
+  <input title="Partie" class="category section" ng-click="submit('section')" type="submit" value="Partie">
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
-        <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item" ng-class="{'uploading': annotation.uploading}">
+        <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item {{ annotation.category }}" ng-class="{'uploading': annotation.uploading}">
           <span class="annotation-data">{{annotation.data}}</span>
           <span class="annotation-metadata"><em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}</em></span>
         </li>

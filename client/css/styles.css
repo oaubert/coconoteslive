@@ -37,7 +37,7 @@
 }
 
 .category {
-    width: 100%;
+    width: 32%;
 }
 
 .agree {
@@ -62,6 +62,10 @@
 
 .question {
     background-color: #0e80c7;
+}
+
+.section {
+    background-color: #ccc;
 }
 
 .topcoat-icon--back {
