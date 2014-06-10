@@ -12,9 +12,7 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>  
-  <input title="Simple réflexion" class="category comment" ng-click="submit('comment')" type="submit" value="Envoyer">
-  <input title="Question" class="category question" ng-click="submit('question')" type="submit" value="Question">
-  <input title="Chapitre" class="category section" ng-click="submit('section')" type="submit" value="Chapitre">
+  <input ng-repeat="shortcut in shortcuts" class="category {{ shortcut.id }}" ng-click="submit({{ shortcut.id }})" type="submit" value="{{ shortcut.label }}">
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">

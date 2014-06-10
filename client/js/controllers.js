@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('mla.controllers', [])
-    .controller('AnnotationListCtrl', ['$scope', 'Annotation', '$interval', function ($scope, Annotation, $interval) {
+    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', 'ShortcutService', '$interval', 
+                              function ($scope, $routeParams, Annotation, ShortcutService, $interval) {
         // Default value
         $scope.username = "Anonyme";
+        $scope.shortcuts = ShortcutService[$routeParams.shortcutId] || [];
 
         $scope.refresh = function() {
             Annotation.query().$then( function (response) {
@@ -79,5 +81,5 @@ angular.module('mla.controllers', [])
 
         $scope.back = function() {
             window.history.back();
-        }
+        };
     }]);
