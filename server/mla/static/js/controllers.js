@@ -1,10 +1,18 @@
 'use strict';
 
-angular.module('mla.controllers', [])
-    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', 'ShortcutService', '$interval', 
-                              function ($scope, $routeParams, Annotation, ShortcutService, $interval) {
+angular.module('mla.controllers', [ 'LocalStorageModule' ])
+    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', 'ShortcutService', '$interval', 'localStorageService',
+                                       function ($scope, $routeParams, Annotation, ShortcutService, $interval, localStorageService) {
         // Default value
-        $scope.username = "Anonyme";
+        var name = localStorageService.get('mla-username');
+        if (name === null) {
+             name = "Anonyme";
+             localStorageService.set('mla-username', name);
+        }
+        $scope.username = name;
+        $scope.$watch('username', function(newValue, oldValue) {
+            localStorageService.set('mla-username', newValue);
+        });
         $scope.shortcuts = ShortcutService[$routeParams.shortcutId] || [];
 
         $scope.refresh = function() {
