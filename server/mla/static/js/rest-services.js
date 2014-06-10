@@ -28,6 +28,9 @@ angular.module('mla.restServices', ['djangoRESTResources'])
                             { id: 'chapitre', label: 'Chapitre' } ],
                  'test': [ { id: 'test1', label: 'Test 1' },
                            { id: 'test2', label: 'Test 2' },
-                           { id: 'test3', label: 'Test 3' } ]
+                           { id: 'test3', label: 'Test 3' },
+                           { id: 'test4', label: 'Test 4' },
+                           { id: 'test5', label: 'Test 5' },
+                           { id: 'test6', label: 'Test 6' } ]
                };
     });
