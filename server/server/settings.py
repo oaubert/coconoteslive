@@ -175,7 +175,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'south',
+    #'south',
     'rest_framework',
     'mla',
 
