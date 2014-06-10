@@ -7,5 +7,5 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'^$', RedirectView.as_view(url="/static/index.html")),
                        url(r'^mla/', include('mla.urls')),
-#                       url(r'^admin/', include(admin.site.urls)),
+                       url(r'^admin/', include(admin.site.urls)),
                        )
