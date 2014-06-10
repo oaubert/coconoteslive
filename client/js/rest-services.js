@@ -21,4 +21,13 @@ angular.module('mla.restServices', ['djangoRESTResources'])
 
                                 };
                                 return res;
-                            }]);
+                            }])
+    .factory('ShortcutService', function () {
+        return { 'basic': [ { id: 'comment', label: 'Envoyer' },
+                            { id: 'question', label: 'Question' },
+                            { id: 'chapitre', label: 'Chapitre' } ],
+                 'test': [ { id: 'test1', label: 'Test 1' },
+                           { id: 'test2', label: 'Test 2' },
+                           { id: 'test3', label: 'Test 3' } ]
+               };
+    });
