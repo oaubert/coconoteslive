@@ -3,7 +3,7 @@
 angular.module('mla.restServices', ['djangoRESTResources'])
     .factory('Annotation', ['djResource', '$filter',
                             function (resource, $filter) {
-                                var res = resource('/mla/annotation/:annotationId', {});
+                                var res = resource('annotation/:annotationId', {});
                                 
                                 res.append = function (annotation, success, error) {
                                     if (annotation.end === undefined)

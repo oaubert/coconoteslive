@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>CominOpenCourseware Live Annotation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="/static/topcoat/css/topcoat-mobile-light.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="topcoat-navigation-bar">
+  <div class="topcoat-navigation-bar__item center">
+    <h1 class="topcoat-navigation-bar__title">Live Annotation groups</h1>
+  </div>
+</div>
+
+<div class="topcoat-list__container scroller">
+    <ul class="topcoat-list list">
+      {% for g in groups %}
+      <li class="topcoat-list__item"><a href="{{ g.name }}">{{ g.label|default:g.name }}</a></li>
+      {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
