@@ -37,8 +37,26 @@
     right: 0px;
 }
 
-.category {
+.category2 {
+    width: 48%;
+}
+.category3 {
     width: 32%;
+}
+.category4 {
+    width: 24%;
+}
+.category5 {
+    width: 19%;
+}
+.category6 {
+    width: 16%;
+}
+.category7 {
+    width: 14%;
+}
+.category8 {
+    width: 12%;
 }
 
 .agree {
