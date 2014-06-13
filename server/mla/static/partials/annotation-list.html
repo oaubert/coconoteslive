@@ -11,8 +11,13 @@
     <input ng-model="annotation" type="text" value="" placeholder="Entrez votre commentaire" class="topcoat-text-input--large" ng-keydown="reset_begin_timestamp()">
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
-  </form>  
-  <input ng-repeat="shortcut in shortcuts" class="category category{{shortcuts.length}} {{ shortcut.id }}" ng-click="submit({{ shortcut.id }})" type="submit" value="{{ shortcut.label }}">
+  </form>
+  <input ng-repeat="shortcut in shortcuts"
+         title="{{ shortcut.tooltip || shortcut.label }}"
+         style="background-color: {{ shortcut.color || '#ddd' }}"
+         class="category category{{shortcuts.length}} {{ shortcut.id }}"
+         ng-click="submit({{ shortcut.id }})"
+         type="submit" value="{{ shortcut.label }}">
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
