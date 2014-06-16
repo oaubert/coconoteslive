@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>CominOpenCourseware Live Annotation</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="/static/topcoat/css/topcoat-mobile-light.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="topcoat-navigation-bar">
+  <div class="topcoat-navigation-bar__item left quarter">
+    <a class="topcoat-icon-button--quiet back-button" href="" onclick="javascript:window.history.back()">
+      <span class="topcoat-icon topcoat-icon--back"></span>
+    </a>
+  </div>
+  <div class="topcoat-navigation-bar__item center">
+    <h1 class="topcoat-navigation-bar__title">Live Annotation - {{ label|default:"Information" }} </h1>
+  </div>
+</div>
+
+<textarea class="topcoat-textarea" readonly="" row="6" cols="20">
+  {{ message }}
+</textarea>
+
+</body>
+</html>

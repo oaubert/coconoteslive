@@ -2,6 +2,7 @@ from .models import Annotation, Group
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 
 from rest_framework import generics
 from .serializers import AnnotationSerializer
@@ -26,6 +27,14 @@ class AnnotationDetail(generics.RetrieveUpdateDestroyAPIView):
         return self.model.objects.filter(group__name=self.kwargs['group'])
 
 def group_view(request, group=None, shortcut=None, **kw):
+    try:
+        g = Group.objects.get(name=group)
+    except Group.DoesNotExist:
+        return render_to_response('message.html', {
+            'label': 'Error',
+            'message': 'Group %s does not exist.' % group,
+            })
+
     return render_to_response('client.html', {
         'group': group,
         'shortcut': shortcut
