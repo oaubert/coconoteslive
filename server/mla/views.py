@@ -25,9 +25,10 @@ class AnnotationDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return self.model.objects.filter(group__name=self.kwargs['group'])
 
-def group_view(request, group=None, **kw):
+def group_view(request, group=None, shortcut=None, **kw):
     return render_to_response('client.html', {
-        'group': group
+        'group': group,
+        'shortcut': shortcut
     }, context_instance=RequestContext(request))
 
 def root(request, *p):
