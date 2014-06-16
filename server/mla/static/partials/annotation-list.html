@@ -15,7 +15,7 @@
   <input ng-repeat="s in shortcuts"
          title="{{ s.tooltip || s.label }}"
          style="background-color: {{ s.color || '#ddd' }}"
-         class="category category{{sortcuts.length}} {{ s.id }}"
+         class="category category{{shortcuts.length}} {{ s.id }}"
          ng-click="submit({{ s.id }})"
          type="submit" value="{{ s.label }}">
 </div>
