@@ -12,12 +12,12 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>
-  <input ng-repeat="shortcut in shortcuts"
-         title="{{ shortcut.tooltip || shortcut.label }}"
-         style="background-color: {{ shortcut.color || '#ddd' }}"
-         class="category category{{shortcuts.length}} {{ shortcut.id }}"
-         ng-click="submit({{ shortcut.id }})"
-         type="submit" value="{{ shortcut.label }}">
+  <input ng-repeat="s in shortcuts"
+         title="{{ s.tooltip || s.label }}"
+         style="background-color: {{ s.color || '#ddd' }}"
+         class="category category{{sortcuts.length}} {{ s.id }}"
+         ng-click="submit({{ s.id }})"
+         type="submit" value="{{ s.label }}">
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
