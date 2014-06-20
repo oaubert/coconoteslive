@@ -25,7 +25,7 @@
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
         <li ng-repeat="annotation in annotations | orderBy:'-begin'" class="topcoat-list__item {{ annotation.category }}" ng-class="{'uploading': annotation.uploading}">
-          <span class="annotation-data">{{annotation.category}}: {{annotation.data}}</span>
+          <span class="annotation-data"><span class="annotation-category" ng-if="annotation.category">[{{annotation.category}}]</span> {{annotation.data}}</span>
           <span class="annotation-metadata"><em>{{annotation.begin | date:'yyyy-MM-dd HH:mm:ss' }} @{{annotation.creator}}</em></span>
         </li>
     </ul>
