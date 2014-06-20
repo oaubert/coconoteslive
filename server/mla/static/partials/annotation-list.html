@@ -1,4 +1,7 @@
 <div class="topcoat-navigation-bar">
+  <div class="shortcutlinks">
+    <div ng-repeat="k in shortcut_keys" class="shortcutlink category{{shortcut_keys.length}}" onclick="document.location = document.location+'/../'+this.dataset.shortcut" data-shortcut="{{ k }}">&nbsp;</div>
+  </div>
     <div class="username">
       <input title="Cliquez ici et indiquez votre nom" onclick="this.select();" type="text" value="Anonyme" ng-model="username"></input><img alt="" src="../static/css/images/user.svg" width="13" height="13">
     </div>

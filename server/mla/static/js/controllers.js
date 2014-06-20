@@ -13,7 +13,9 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
         $scope.$watch('username', function(newValue, oldValue) {
             localStorageService.set('mla-username', newValue);
         });
+        $scope.shortcutid = $routeParams.shortcutId;
         $scope.shortcuts = ShortcutService.data[$routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut] || [];
+        $scope.shortcut_keys = ShortcutService.keys();
 
         $scope.refresh = function() {
             Annotation.query().$then( function (response) {
