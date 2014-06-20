@@ -16,7 +16,7 @@
          title="{{ s.tooltip || s.label }}"
          style="background-color: {{ s.color || '#ddd' }}"
          class="category category{{shortcuts.length}} {{ s.id }}"
-         ng-click="submit({{ s.id }})"
+         ng-click="submit('{{ s.id }}')"
          type="submit" value="{{ s.label }}">
 </div>
 <div class="topcoat-list__container scroller">
