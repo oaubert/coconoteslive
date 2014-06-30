@@ -1,8 +1,11 @@
 from .models import Annotation, Group
 
+import re
+import datetime
+import time
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
 
 from rest_framework import generics
 from .serializers import AnnotationSerializer
@@ -43,4 +46,33 @@ def group_view(request, group=None, shortcut=None, **kw):
 def root(request, *p):
     return render_to_response('root.html', {
         'groups': Group.objects.all()
+    })
+
+def export_view(request, group=None, t0=None, **kw):
+    def cleanup(m):
+        return re.subn("[^-a-zA-Z0-9_]", "_", m)[0]
+
+    if group is None:
+        qs = Annotation.objects.order_by('created')
+    else:
+        qs = Annotation.objects.filter(group__name=group).order_by('created')
+    if not qs.count():
+        return render_to_response('message.html', {
+            'label': 'Error',
+            'message': 'No message in group %s.' % group,
+            })
+    if t0 is None:
+        # Use first value
+        t0 = qs[0].created
+    else:
+        # Convert ts (in ms) to datetime
+        t0 = datetime.datetime(*time.localtime(float(t0))[:7])
+
+
+    return render_to_response('message.html', {
+        'label': 'Exported data',
+        'message': "\n".join("%d [%s] %s" % (
+            long((a.created - t0).total_seconds()),
+            ",".join(cleanup(m) for m in (a.category, a.creator) if m),
+            (a.data.replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs)
     })
