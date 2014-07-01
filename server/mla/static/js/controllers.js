@@ -59,8 +59,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             var begin = parseInt(this.begin_timestamp, 10) || (new Date()).getTime();
             var end = (new Date()).getTime();
             var creator = $scope.username;
-            this.annotation = "";
-            this.begin_timestamp = null;
+            $scope.annotation = "";
+            $scope.begin_timestamp = null;
 
             var ann = Annotation.append({ data: data,
                                           begin: begin,
