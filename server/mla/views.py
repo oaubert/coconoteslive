@@ -50,7 +50,7 @@ def root(request, *p):
 
 def export_view(request, group=None, t0=None, **kw):
     def cleanup(m):
-        return re.subn("[^-a-zA-Z0-9_]", "_", m)[0]
+        return re.subn("[^-a-zA-Z0-9_]", "_", m.strip())[0]
 
     if group is None:
         qs = Annotation.objects.order_by('created')
@@ -68,11 +68,19 @@ def export_view(request, group=None, t0=None, **kw):
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
 
+    # Extract custom categories
+    if ':' in a.data:
+        cat, data = a.data.split(":", 1)
+        cat = cat.strip()
+        data = data.strip()
+    else:
+        cat = ""
+        data = a.data.strip()
 
     return render_to_response('message.html', {
         'label': 'Exported data',
         'message': "\n".join("%d [%s] %s" % (
             long((a.created - t0).total_seconds()),
-            ",".join(cleanup(m) for m in (a.category, a.creator) if m),
+            ",".join(cleanup(m) for m in (cat, a.category, a.creator) if m),
             (a.data.replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs)
     })
