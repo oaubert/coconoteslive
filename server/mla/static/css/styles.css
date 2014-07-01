@@ -154,7 +154,7 @@ a {
 .list > li {
     position: relative;
     clear: both;
-    padding: 0px 1em;
+    padding: 2px 1em;
     margin: 0px;
 }
 
@@ -297,6 +297,16 @@ ul {
     font-style: italic;
     font-size: 80%;
     color: #aaa;
+}
+
+.annotation-data {
+}
+
+.annotation-category {
+    display: inline;
+    margin-top: 2px;
+    border: 1px solid grey;
+    background-color: #ccc;
 }
 
 .uploading {
