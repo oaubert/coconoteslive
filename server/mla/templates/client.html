@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href="../static/topcoat/css/topcoat-mobile-light.min.css" rel="stylesheet">
     <link href="../static/css/styles.css" rel="stylesheet">
+    <style type="text/css" rel="stylesheet">
+      {{ customcss }}
+    </style>
 </head>
 
 <body data-group="{{ group }}" data-shortcut="{{ shortcut }}">
 
   <div class="main" ng-view></div>
 
+  <script type="text/javascript">
+    window.coconotes_shortcuts = {{ shortcuts|safe }};
+    window.coconotes_shortcutkeys = Object.keys(window.coconotes_shortcuts);
+  </script>
   <script src="../static/lib/angular.js"></script>
   <script src="../static/lib/angular-django-rest-resource.js"></script>
   <script src="../static/lib/angular-route.js"></script>
@@ -20,6 +27,5 @@
   <script src="../static/js/controllers.js"></script>
   <script src="../static/js/memory-services.js"></script>
   <script src="../static/js/rest-services.js"></script>
-
 </body>
 </html>
