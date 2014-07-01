@@ -290,6 +290,11 @@ ul {
     border: none;
 }
 
+.username input:focus {
+    border: 1px solid #555;
+    background-color: #FFF;
+}
+
 .annotation-metadata {
     display: block;
     text-align: right;
