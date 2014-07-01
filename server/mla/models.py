@@ -2,6 +2,11 @@ from gettext import gettext as _
 from django.db import models
 
 class Group(models.Model):
+    class Meta:
+        verbose_name_plural = "groupes"
+        verbose_name = "groupe"
+        ordering = ('name', 'label')
+
     name = models.CharField(_("Identifier"),
                             max_length=128,
                             unique=True,
@@ -17,6 +22,11 @@ class Group(models.Model):
             return self.name
 
 class Annotation(models.Model):
+    class Meta:
+        verbose_name_plural = "annotations"
+        verbose_name = "annotation"
+        ordering = ('created', 'creator')
+
     data = models.TextField(_('Annotation data'),
                             blank=True)
 
