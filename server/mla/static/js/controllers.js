@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('mla.controllers', [ 'LocalStorageModule' ])
-    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', 'ShortcutService', '$interval', 'localStorageService',
-                                       function ($scope, $routeParams, Annotation, ShortcutService, $interval, localStorageService) {
+    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', '$interval', 'localStorageService',
+                                       function ($scope, $routeParams, Annotation, $interval, localStorageService) {
         // Default value
         var name = localStorageService.get('mla-username');
         if (name === null) {
