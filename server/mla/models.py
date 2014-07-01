@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from gettext import gettext as _
 from django.db import models
 
@@ -64,3 +66,31 @@ class Annotation(models.Model):
                                   self.category,
                                   self.begin,
                                   self.data)
+
+class Shortcut(models.Model):
+    class Meta:
+        verbose_name_plural = "shortcuts"
+        verbose_name = "shortcut"
+        ordering = ('position', 'label')
+
+    group = models.CharField("Groupe",
+                             max_length=64,
+                             blank=False)
+    identifier = models.CharField("Identificateur",
+                                  max_length=64,
+                                  unique=True,
+                                  blank=False)
+    label = models.CharField("Label",
+                             max_length=64,
+                             blank=True)
+    tooltip = models.CharField("Tooltip",
+                               max_length=250,
+                               blank=True)
+    color = models.CharField("Couleur",
+                             max_length=12,
+                             blank=True)
+    position = models.IntegerField("Position",
+                                   null=True)
+
+    def __unicode__(self):
+        return "%(identifier)s [%(group)s] %(tooltip)s (%(color)s)" % self.__dict__

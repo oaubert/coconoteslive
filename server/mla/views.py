@@ -1,14 +1,16 @@
-from .models import Annotation, Group
+from .models import Annotation, Group, Shortcut
 
 import re
 import datetime
 import time
+import json
+import itertools
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 from rest_framework import generics
-from .serializers import AnnotationSerializer
+from .serializers import AnnotationSerializer, ShortcutSerializer, ShortcutKeySerializer
 
 class AnnotationList(generics.ListCreateAPIView):
     model = Annotation
@@ -28,6 +30,23 @@ class AnnotationDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return self.model.objects.filter(group__name=self.kwargs['group'])
+
+class ShortcutKeyList(generics.ListCreateAPIView):
+    model = Shortcut
+    serializer_class = ShortcutKeySerializer
+
+    def get_queryset(self):
+        return Shortcut.objects.values('group').annotate().order_by()
+
+class ShortcutList(generics.ListCreateAPIView):
+    model = Shortcut
+    serializer_class = ShortcutSerializer
+
+    def get_queryset(self):
+        if 'block' in self.kwargs and self.kwargs['block']:
+            return self.model.objects.filter(group=self.kwargs['block'])
+        else:
+            return self.model.objects.all()
 
 def group_view(request, group=None, shortcut=None, **kw):
     try:
