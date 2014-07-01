@@ -90,19 +90,26 @@ def export_view(request, group=None, t0=None, **kw):
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
 
-    # Extract custom categories
-    if ':' in a.data:
-        cat, data = a.data.split(":", 1)
-        cat = cat.strip()
-        data = data.strip()
-    else:
-        cat = ""
-        data = a.data.strip()
+    def custominfo(a):
+        # Extract custom categories
+        if ':' in a.data:
+            cat, data = a.data.split(":", 1)
+            cat = cat.strip()
+            data = data.strip().replace('\n', '')
+        else:
+            cat = ""
+            data = a.data.strip().replace('\n', '')
+        return cat, data
+
+    def customtag(a):
+        return custominfo(a)[0]
+    def data(a):
+        return custominfo(a)[1]
 
     return render_to_response('message.html', {
         'label': 'Exported data',
         'message': "\n".join("%d [%s] %s" % (
             long((a.created - t0).total_seconds()),
-            ",".join(cleanup(m) for m in (cat, a.category, a.creator) if m),
-            (a.data.replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs)
+            ",".join(cleanup(m) for m in (customtag(a), a.category, a.creator) if m),
+            (data(a) or cleanup(a.category) or "(empty)")) for a in qs)
     })
