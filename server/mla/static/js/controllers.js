@@ -14,8 +14,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             localStorageService.set('mla-username', newValue);
         });
         $scope.shortcut_keys = window.coconotes_shortcutkeys;
-        $scope.shortcutid = $routeParams.shortcutId;
-        $scope.shortcuts = window.coconotes_shortcuts[$routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut] || [];
+        $scope.shortcutid = $routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut;
+        $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
 
         $scope.refresh = function() {
             Annotation.query().$then( function (response) {
@@ -79,6 +79,23 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             if (! this.annotation) {
                 this.begin_timestamp = (new Date()).getTime();
             }
+        };
+
+        $scope.shortcut_nav = function (direction) {
+            var index = $scope.shortcut_keys.indexOf($scope.shortcutid);
+            console.log("shortcut_nav", direction, index);
+            if (index == -1 && direction == -1) {
+                // Special case: no shortcut yet, we want to go to the last element
+                index = -1;
+            } else {
+                index = index + direction;
+            }
+            if (index < 0) {
+                index = $scope.shortcut_keys.length + index;
+            }
+            $scope.shortcutid = $scope.shortcut_keys[index];
+            $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
+            $scope.refresh();
         };
 
         $scope.refresh();

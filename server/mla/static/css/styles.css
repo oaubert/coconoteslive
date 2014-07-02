@@ -352,3 +352,25 @@ ul {
         padding-top: 10px;
     }
 }
+
+.shortcut-bar {
+    float: left;
+    width: 100%;
+}
+
+.shortcut-nav {
+    position: absolute;
+    top: 70px;
+    width: 1rem;
+    height: 110px;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.shortcut-nav-prev {
+    left: 0px;
+}
+.shortcut-nav-next {
+    right: 0px;
+}

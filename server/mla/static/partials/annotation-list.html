@@ -1,7 +1,4 @@
 <div class="topcoat-navigation-bar">
-  <div class="shortcutlinks">
-    <div ng-repeat="k in shortcut_keys" class="shortcutlink category{{shortcut_keys.length}}" onclick="document.location = document.location+'/../'+this.dataset.shortcut" data-shortcut="{{ k }}">&nbsp;</div>
-  </div>
     <div class="username">
       <input title="Cliquez ici et indiquez votre nom" onclick="this.select();" type="text" value="Anonyme" ng-model="username"></input><img alt="" src="../static/css/images/user.svg" width="13" height="13">
     </div>
@@ -15,12 +12,16 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>
-  <input ng-repeat="s in shortcuts"
-         title="{{ s.tooltip || s.label }}"
-         style="background-color: {{ s.color || '#ddd' }}"
-         class="category-button category{{shortcuts.length}} category-{{ s.identifier }}"
-         ng-click="submit('{{ s.identifier }}')"
-         type="submit" value="{{ s.label }}">
+  <button class="shortcut-nav shortcut-nav-prev" ng-click="shortcut_nav(-1)"></button>
+  <div class="shortcut-bar">
+    <input ng-repeat="s in shortcuts"
+           title="{{ s.tooltip || s.label }}"
+           style="background-color: {{ s.color || '#ddd' }}"
+           class="category-button category{{shortcuts.length}} category-{{ s.identifier }}"
+           ng-click="submit('{{ s.identifier }}')"
+           type="submit" value="{{ s.label }}">
+  </div>
+  <button class="shortcut-nav shortcut-nav-next" ng-click="shortcut_nav(+1)"></button>
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">
