@@ -83,7 +83,6 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
 
         $scope.shortcut_nav = function (direction) {
             var index = $scope.shortcut_keys.indexOf($scope.shortcutid);
-            console.log("shortcut_nav", direction, index);
             if (index == -1 && direction == -1) {
                 // Special case: no shortcut yet, we want to go to the last element
                 index = -1;
