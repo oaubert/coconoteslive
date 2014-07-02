@@ -23,11 +23,6 @@ html, body {
     }
 }
 
-/* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
-.topcoat-text-input--large {
-    min-height: 3.4rem;
-}
-
 .back-button {
     top: 10px;
     position: absolute;
@@ -113,6 +108,8 @@ html, body {
 
 .topcoat-text-input--large {
     width: 100%;
+    /* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
+    min-height: 72px;
 }
 
 a {
@@ -373,4 +370,8 @@ ul {
 }
 .shortcut-nav-next {
     right: 0px;
+}
+.topcoat-navigation-bar {
+    /* Firefox does not handle vertical rem units in the same way as Chrome, use pixels. */
+    height: 70px;
 }
