@@ -340,3 +340,15 @@ ul {
 .topcoat-list {
     background-color: #f3f3f3;
 }
+
+#logo {
+    width: 160px;
+    padding-top: 18px;
+}
+
+@media (min-width: 600px) {
+    #logo {
+        width: 240px;
+        padding-top: 10px;
+    }
+}
