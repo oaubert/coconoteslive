@@ -13,7 +13,7 @@
     <br>
   </form>
   <button class="shortcut-nav shortcut-nav-prev" ng-click="shortcut_nav(-1)"></button>
-  <div class="shortcut-bar">
+  <div class="shortcut-bar" ng-swipe-left="shortcut_nav(-1)" ng-swipe-right="shortcut_nav(+1)">
     <input ng-repeat="s in shortcuts"
            title="{{ s.tooltip || s.label }}"
            style="background-color: {{ s.color || '#ddd' }}"

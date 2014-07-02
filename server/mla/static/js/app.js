@@ -2,6 +2,7 @@
 
 angular.module('mla', [
     'ngRoute',
+    'ngTouch',
     'mla.controllers',
     'mla.restServices'
 ]).
