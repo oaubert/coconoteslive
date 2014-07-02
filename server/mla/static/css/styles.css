@@ -110,6 +110,7 @@ html, body {
     width: 100%;
     /* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
     min-height: 72px;
+    line-height: 72px;
 }
 
 a {
