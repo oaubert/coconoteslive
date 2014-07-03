@@ -108,6 +108,7 @@ html, body {
 
 .topcoat-text-input--large {
     width: 100%;
+    font-size: 1.1rem;
     /* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
     min-height: 72px;
     line-height: 72px;
