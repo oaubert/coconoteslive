@@ -50,6 +50,8 @@ class AnnotationAdmin(admin.ModelAdmin):
     list_editable = ( 'creator', 'data', 'category', 'group')
     list_filter = ( 'group', 'creator', 'category', 'created', 'begin' )
     search_fields = [ 'data', 'creator' ]
+    exportable_fields = ('pk', 'group', 'creator', 'data', 'category', 'begin', 'end', 'created', 'source')
+
     list_display_links = ( 'pk', )
     actions = ( export_model_as_csv, )
 
