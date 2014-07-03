@@ -70,7 +70,7 @@ def root(request, *p):
         'groups': Group.objects.all()
     })
 
-def export_view(request, group=None, t0=None, **kw):
+def export_view(request, group=None, **kw):
     def cleanup(m):
         return re.subn("[^-a-zA-Z0-9_]", "_", m.strip())[0]
 
@@ -83,6 +83,7 @@ def export_view(request, group=None, t0=None, **kw):
             'label': 'Error',
             'message': 'No message in group %s.' % group,
             })
+    t0 = request.GET.get('t0', None)
     if t0 is None:
         # Use first value
         t0 = qs[0].created
