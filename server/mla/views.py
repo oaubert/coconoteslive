@@ -62,7 +62,7 @@ def group_view(request, group=None, shortcut=None, **kw):
         'shortcut': shortcut,
         'customcss': "\n".join(".category-%(identifier)s .annotation-category, .category-button.category-%(identifier)s { background-color: %(color)s }" % s.__dict__
                                for s in Shortcut.objects.exclude(color="")),
-        'shortcuts': json.dumps(dict( (k, list(v)) for k, v in itertools.groupby(Shortcut.objects.order_by('group').values(), lambda x: x['group']) )),
+        'shortcuts': json.dumps(dict( (k, list(v)) for k, v in itertools.groupby(Shortcut.objects.order_by('group', 'position').values(), lambda x: x['group']) )),
     }, context_instance=RequestContext(request))
 
 def root(request, *p):
