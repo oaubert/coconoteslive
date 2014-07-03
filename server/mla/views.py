@@ -13,6 +13,9 @@ from django.http import HttpResponse
 from rest_framework import generics
 from .serializers import AnnotationSerializer, ShortcutSerializer, ShortcutKeySerializer
 
+# Reaction time in seconds (substracted from annotation begin time).
+REACTIONTIME = 5
+
 class AnnotationList(generics.ListCreateAPIView):
     model = Annotation
     serializer_class = AnnotationSerializer
@@ -113,7 +116,7 @@ def export_view(request, group=None, **kw):
         # considering that transmission time is negligible.
         # We substract the annotation duration to get the annotation begin
         duration = long((a.end - a.begin).total_seconds())
-        begin = max(0, long((a.created - t0).total_seconds()) - duration)
+        begin = max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
         end = begin + max(duration, 30)
         return "%d-%d" % (begin, end)
 
