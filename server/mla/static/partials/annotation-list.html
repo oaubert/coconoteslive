@@ -12,7 +12,7 @@
     <input ng-model="begin_timestamp" type="hidden" value="">
     <br>
   </form>
-  <button class="shortcut-nav shortcut-nav-prev" ng-click="shortcut_nav(-1)"></button>
+  <button class="shortcut-nav shortcut-nav-prev" ng-click="shortcut_nav(-1)"><img src="../static/img/arrow.svg"></button>
   <div class="shortcut-bar" ng-swipe-left="shortcut_nav(-1)" ng-swipe-right="shortcut_nav(+1)">
     <input ng-repeat="s in shortcuts"
            title="{{ s.tooltip || s.label }}"
@@ -21,7 +21,7 @@
            ng-click="submit('{{ s.identifier }}')"
            type="submit" value="{{ s.label }}">
   </div>
-  <button class="shortcut-nav shortcut-nav-next" ng-click="shortcut_nav(+1)"></button>
+  <button class="shortcut-nav shortcut-nav-next" ng-click="shortcut_nav(+1)"><img src="../static/img/arrow.svg"></button>
 </div>
 <div class="topcoat-list__container scroller">
     <ul class="topcoat-list list">

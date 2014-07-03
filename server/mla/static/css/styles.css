@@ -368,9 +368,24 @@ ul {
     margin: 0px;
 }
 
+.shortcut-nav img {
+    width: 1rem;
+    position: absolute;
+    bottom: 4px;
+    left: 1px;
+}
+
 .shortcut-nav-prev {
     left: 0px;
 }
+.shortcut-nav-prev img {
+    -webkit-transform: scaleX(-1);
+    -moz-transform:    scaleX(-1);
+    -ms-transform:     scaleX(-1);
+    -o-transform:      scaleX(-1);
+    transform: scaleX(-1);
+}
+
 .shortcut-nav-next {
     right: 0px;
 }
