@@ -8,6 +8,7 @@ import itertools
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 
 from rest_framework import generics
 from .serializers import AnnotationSerializer, ShortcutSerializer, ShortcutKeySerializer
@@ -106,11 +107,21 @@ def export_view(request, group=None, **kw):
         return custominfo(a)[0]
     def data(a):
         return custominfo(a)[1]
+    def timerange(a):
+        # Compute begin: we consider that a.created is more trusted
+        # than a.end, so use it as a reference (for end time),
+        # considering that transmission time is negligible.
+        # We substract the annotation duration to get the annotation begin
+        duration = long((a.end - a.begin).total_seconds())
+        begin = max(0, long((a.created - t0).total_seconds()) - duration)
+        end = begin + max(duration, 30)
+        return "%d-%d" % (begin, end)
 
-    return render_to_response('message.html', {
-        'label': 'Exported data',
-        'message': "\n".join("%d [%s] %s" % (
-            long((a.created - t0).total_seconds()),
-            ",".join(cleanup(m) for m in (customtag(a), a.category, a.creator) if m),
-            (data(a) or cleanup(a.category) or "(empty)")) for a in qs)
-    })
+    response = HttpResponse(mimetype='text/plain')
+    response.write("\n".join("%s [%s] %s" % (
+        timerange(a),
+        ",".join(cleanup(m) for m in (customtag(a), a.category, a.creator) if m),
+        (data(a) or cleanup(a.category) or "(empty)")) for a in qs)
+                   )
+    return response
+
