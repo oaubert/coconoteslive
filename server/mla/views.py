@@ -74,6 +74,23 @@ def root(request, *p):
         'groups': Group.objects.all()
     })
 
+def sync_view(request, group=None, **kw):
+    """Synchronization view.
+
+    It can be used by recorder application to send synchronization information.
+    """
+    action = request.GET.get('action', 'GENERIC_ACTION')
+    a = Annotation(data=action,
+                   creator='_admin',
+                   category='admin',
+                   group=Group.objects.get(name=group))
+    a.begin = a.created
+    a.end = a.created
+    a.save()
+    response = HttpResponse(mimetype='text/plain; charset=utf-8')
+    response.write("OK %s %s" % (action, unicode(a.created)))
+    return response
+
 def export_view(request, group=None, **kw):
     def cleanup(m):
         return re.subn("[^-a-zA-Z0-9_]", "_", m.strip())[0]
