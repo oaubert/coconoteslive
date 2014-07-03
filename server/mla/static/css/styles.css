@@ -358,6 +358,7 @@ ul {
 }
 
 .shortcut-nav {
+    background-color: #dfe2e2;
     position: absolute;
     top: 70px;
     width: 1rem;
