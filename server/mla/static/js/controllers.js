@@ -14,7 +14,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             localStorageService.set('mla-username', newValue);
         });
         $scope.shortcut_keys = window.coconotes_shortcutkeys;
-        $scope.shortcutid = $routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut;
+        $scope.shortcutid = $routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut || "structure";
         $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
 
         $scope.refresh = function() {
