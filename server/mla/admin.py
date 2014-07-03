@@ -4,6 +4,8 @@ import datetime
 from django.contrib import admin
 from django.http import HttpResponse
 from django.contrib.admin import util as admin_util
+from django.forms import TextInput, Textarea
+from django.db import models
 
 from .models import Group, Annotation, Shortcut
 
@@ -40,8 +42,14 @@ export_model_as_csv.short_description = 'CSV export'
 admin.site.register(Group)
 
 class AnnotationAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'creator', 'data', 'category', 'begin', 'created', 'source', 'group')
-    list_editable = ( 'creator', 'data', 'category', 'begin', 'source', 'group')
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size': '20'})},
+        models.TextField: {'widget': Textarea(attrs={'rows': '2', 'cols': '20'})},
+    }
+    list_display = ('pk', 'group', 'creator', 'data', 'category', 'begin', 'end', 'created')
+    list_editable = ( 'creator', 'data', 'category', 'group')
+    list_filter = ( 'group', 'creator', 'category', 'created', 'begin' )
+    search_fields = [ 'data', 'creator' ]
     list_display_links = ( 'pk', )
     actions = ( export_model_as_csv, )
 
@@ -51,6 +59,8 @@ class ShortcutAdmin(admin.ModelAdmin):
     list_display = ('pk', 'group', 'identifier', 'label', 'tooltip', 'color', 'position')
     list_editable = ( 'group', 'identifier', 'label', 'tooltip', 'color', 'position')
     list_display_links = ( 'pk', )
+    list_filter = ( 'group', )
+    search_fields = [ 'identifier', 'label', 'tooltip' ]
     actions = ( export_model_as_csv, )
 
 admin.site.register(Shortcut, ShortcutAdmin)
