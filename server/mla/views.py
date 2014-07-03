@@ -117,7 +117,7 @@ def export_view(request, group=None, **kw):
         end = begin + max(duration, 30)
         return "%d-%d" % (begin, end)
 
-    response = HttpResponse(mimetype='text/plain')
+    response = HttpResponse(mimetype='text/plain; charset=utf-8')
     response.write("\n".join("%s [%s] %s" % (
         timerange(a),
         ",".join(cleanup(m) for m in (customtag(a), a.category, a.creator) if m),
