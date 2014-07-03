@@ -353,8 +353,7 @@ ul {
 }
 
 .shortcut-bar {
-    float: left;
-    width: 100%;
+    margin-left: 4%;
 }
 
 .shortcut-nav {
