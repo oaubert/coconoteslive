@@ -80,12 +80,12 @@ def sync_view(request, group=None, **kw):
     It can be used by recorder application to send synchronization information.
     """
     action = request.GET.get('action', 'GENERIC_ACTION')
-    a = Annotation(data=action,
+    a = Annotation(data='%s - %s' % (action, str(time.time())),
                    creator='_admin',
                    category='admin',
                    group=Group.objects.get(name=group))
-    a.begin = a.created
-    a.end = a.created
+    a.begin = datetime.datetime.now()
+    a.end = a.begin
     a.save()
     response = HttpResponse(mimetype='text/plain; charset=utf-8')
     response.write("OK %s %s" % (action, unicode(a.created)))
