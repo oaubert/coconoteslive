@@ -56,7 +56,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
         };
 
         $scope.submit = function(category) {
-            var data = this.annotation;
+            var data = $scope.annotation;
             var begin = parseInt(this.begin_timestamp, 10) || (new Date()).getTime();
             var end = (new Date()).getTime();
             var creator = $scope.username;
