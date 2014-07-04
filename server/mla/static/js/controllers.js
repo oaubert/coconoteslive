@@ -63,6 +63,11 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             $scope.annotation = "";
             $scope.begin_timestamp = null;
 
+            if (! category && data.indexOf(':') > 0) {
+                var l = data.split(':');
+                category = l[0].trim().replace(' ', '_');
+                data = l.slice(1).join(":").trim();
+            }
             var ann = Annotation.append({ data: data,
                                           begin: begin,
                                           end: end,
