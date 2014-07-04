@@ -112,21 +112,6 @@ def export_view(request, group=None, **kw):
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
 
-    def custominfo(a):
-        # Extract custom categories
-        if ':' in a.data:
-            cat, data = a.data.split(":", 1)
-            cat = cat.strip()
-            data = data.strip().replace('\n', '')
-        else:
-            cat = ""
-            data = a.data.strip().replace('\n', '')
-        return cat, data
-
-    def customtag(a):
-        return custominfo(a)[0]
-    def data(a):
-        return custominfo(a)[1]
     def timerange(a):
         # Compute begin: we consider that a.created is more trusted
         # than a.end, so use it as a reference (for end time),
@@ -140,8 +125,8 @@ def export_view(request, group=None, **kw):
     response = HttpResponse(mimetype='text/plain; charset=utf-8')
     response.write("\n".join("%s [%s] %s" % (
         timerange(a),
-        ",".join(cleanup(m) for m in (customtag(a), a.category, a.creator) if m),
-        (data(a) or cleanup(a.category) or "(empty)")) for a in qs)
+        ",".join(cleanup(m) for m in (a.category, a.creator) if m),
+        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs)
                    )
     return response
 
