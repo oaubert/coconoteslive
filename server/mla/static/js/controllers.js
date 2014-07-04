@@ -92,6 +92,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             }
             if (index < 0) {
                 index = $scope.shortcut_keys.length + index;
+            } else if (index > $scope.shortcut_keys.length - 1) {
+                index = 0;
             }
             $scope.shortcutid = $scope.shortcut_keys[index];
             $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
