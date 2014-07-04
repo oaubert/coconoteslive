@@ -111,6 +111,8 @@ def export_view(request, group=None, **kw):
     else:
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
+        # Hackish way of specifying tzinfo
+        t0 = t0.replace(tzinfo, qs[0].created.tzinfo)
 
     def timerange(a):
         # Compute begin: we consider that a.created is more trusted
