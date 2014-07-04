@@ -13,6 +13,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
         $scope.$watch('username', function(newValue, oldValue) {
             localStorageService.set('mla-username', newValue);
         });
+        $scope.groupname = document.getElementsByTagName('body')[0].dataset.group;
         $scope.shortcut_keys = window.coconotes_shortcutkeys;
         $scope.shortcutid = $routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut || "structure";
         $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];

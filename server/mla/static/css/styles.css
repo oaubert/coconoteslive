@@ -280,7 +280,7 @@ ul {
 .username {
     position: absolute;
     right: 1em;
-    top: 1.5em;
+    top: .5em;
 }
 
 .username input {
@@ -293,6 +293,14 @@ ul {
     border: 1px solid #555;
     background-color: #FFF;
 }
+
+.groupname {
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    font-size: small;
+}
+
 
 .annotation-metadata {
     display: block;
