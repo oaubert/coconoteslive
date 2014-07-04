@@ -79,7 +79,7 @@ class Shortcut(models.Model):
     identifier = models.CharField("Identificateur",
                                   max_length=64,
                                   unique=True,
-                                  blank=False)
+                                  blank=True)
     label = models.CharField("Label",
                              max_length=64,
                              blank=True)
