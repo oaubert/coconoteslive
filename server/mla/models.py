@@ -34,7 +34,7 @@ class Annotation(models.Model):
 
     created = models.DateTimeField(_('Creation date'),
                                    help_text=_('Annotation creation date'),
-                                   null=True, editable=False,
+                                   null=True, editable=True,
                                    auto_now_add=True)
 
     creator = models.CharField(_("Creator"),
