@@ -1,5 +1,6 @@
 import unicodecsv as csv
 import datetime
+import copy
 
 from django.contrib import admin
 from django.http import HttpResponse
@@ -39,7 +40,23 @@ def export_model_as_csv(modeladmin, request, queryset):
     return response
 export_model_as_csv.short_description = 'CSV export'
 
-admin.site.register(Group)
+def migrate_reference(modeladmin, request, queryset):
+    for obj in queryset:
+        for group in [ 'Groupe%d' % i for i in range(1, 10) ]:
+            a = copy.copy(obj)
+            a.id = None
+            a.group = Group.objects.get(name=group)
+            a.save()
+            a.created = obj.created
+            a.save()
+    return None
+migrate_reference.short_description = 'Migrate reference annotation'
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name', 'label')
+    list_editable = ('name', 'label')
+    list_display_links = ('pk', )
+admin.site.register(Group, GroupAdmin)
 
 class AnnotationAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -53,7 +70,7 @@ class AnnotationAdmin(admin.ModelAdmin):
     exportable_fields = ('pk', 'group', 'creator', 'data', 'category', 'begin', 'end', 'created', 'source')
 
     list_display_links = ( 'pk', )
-    actions = ( export_model_as_csv, )
+    actions = ( export_model_as_csv, migrate_reference )
 
 admin.site.register(Annotation, AnnotationAdmin)
 
