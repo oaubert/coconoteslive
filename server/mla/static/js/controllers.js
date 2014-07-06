@@ -75,7 +75,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
                                           creator: creator
                                         }
                                         ,
-                                        function (response) { $scope.refresh() });
+                                        function (response) { $scope.feedback = ""; $scope.refresh(); },
+                                        function (reponse) { $scope.feedback = "Connection trouble"; });
             // Immediately update displayed list (optimistic view, there should be no error)
             ann.uploading = true;
             $scope.annotations.push(ann);

@@ -301,6 +301,13 @@ ul {
     font-size: small;
 }
 
+.feedback {
+    position: absolute;
+    right: 1rem;
+    top: 3rem;
+    font-size: small;
+    color: #f55;
+}
 
 .annotation-metadata {
     display: block;
