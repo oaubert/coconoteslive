@@ -107,7 +107,7 @@ def export_view(request, group=None, **kw):
     t0 = request.GET.get('t0', None)
     if t0 is None:
         # Use first value
-        refs = qs.filter(data__contains='START')
+        refs = qs.filter(data__contains='START', category='admin')
         if refs.count():
             t0 = refs[0].created
         else:
@@ -133,7 +133,7 @@ def export_view(request, group=None, **kw):
     response.write("\n".join("%s [%s] %s" % (
         timerange(a),
         ",".join(cleanup(m) for m in (a.category, a.creator) if m),
-        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs)
+        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs.exclude(category='admin'))
                    )
     return response
 
