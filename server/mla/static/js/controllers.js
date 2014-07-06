@@ -19,7 +19,12 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
         $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
 
         $scope.refresh = function() {
-            Annotation.query().$then( function (response) {
+            Annotation.query({}, 
+                             function () { },
+                             function () { $scope.feedback = "Network trouble"; }
+                            ).$then( function (response) {
+                if (response === undefined)
+                    return;
                 var data = response.data;
 
                 if ($scope.annotations && $scope.annotations.length && $scope.annotations[$scope.annotations.length - 1].id === undefined) {
@@ -79,7 +84,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
                                         }
                                         ,
                                         function (response) { $scope.feedback = ""; $scope.refresh(); },
-                                        function (reponse) { $scope.feedback = "Connection trouble"; });
+                                        function (reponse) { $scope.feedback = "Network trouble"; });
             // Immediately update displayed list (optimistic view, there should be no error)
             ann.uploading = true;
             $scope.annotations.push(ann);
