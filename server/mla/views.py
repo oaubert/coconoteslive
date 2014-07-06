@@ -14,7 +14,7 @@ from rest_framework import generics
 from .serializers import AnnotationSerializer, ShortcutSerializer, ShortcutKeySerializer
 
 # Reaction time in seconds (substracted from annotation begin time).
-REACTIONTIME = 2
+REACTIONTIME = 10
 
 class AnnotationList(generics.ListCreateAPIView):
     model = Annotation
