@@ -71,8 +71,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
             if (! category && data.indexOf(':') > 0) {
                 var l = data.split(':');
                 var cat = l[0].trim();
-                if (cat != 'http' && cat != 'https' && cat.length <= 16) {
-                    category = cat.replace(' ', '_');
+                if (cat != 'http' && cat != 'https' && cat.indexOf(" ") < 0) {
+                    category = cat;
                     data = l.slice(1).join(":").trim();
                 }
             }
