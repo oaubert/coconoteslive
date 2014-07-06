@@ -107,7 +107,12 @@ def export_view(request, group=None, **kw):
     t0 = request.GET.get('t0', None)
     if t0 is None:
         # Use first value
-        t0 = qs[0].created
+        refs = qs.filter(data__contains='START')
+        if refs.count():
+            t0 = refs[0].created
+        else:
+            # Fallback on first annotation
+            t0 = qs[0].created
     else:
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
