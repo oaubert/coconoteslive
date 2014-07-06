@@ -65,8 +65,11 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
 
             if (! category && data.indexOf(':') > 0) {
                 var l = data.split(':');
-                category = l[0].trim().replace(' ', '_');
-                data = l.slice(1).join(":").trim();
+                var cat = l[0].trim();
+                if (cat != 'http' && cat != 'https' && cat.length <= 16) {
+                    category = cat.replace(' ', '_');
+                    data = l.slice(1).join(":").trim();
+                }
             }
             var ann = Annotation.append({ data: data,
                                           begin: begin,
