@@ -95,6 +95,8 @@ def export_view(request, group=None, **kw):
     def cleanup(m):
         return re.subn("[^-a-zA-Z0-9_]", "_", m.strip())[0]
 
+    advene = request.GET.get('advene', None)
+
     if group is None:
         qs = Annotation.objects.order_by('created')
     else:
@@ -117,7 +119,7 @@ def export_view(request, group=None, **kw):
         # Convert ts (in ms) to datetime
         t0 = datetime.datetime(*time.localtime(float(t0))[:7])
         # Hackish way of specifying tzinfo
-        t0 = t0.replace(tzinfo, qs[0].created.tzinfo)
+        t0 = t0.replace('tzinfo', qs[0].created.tzinfo)
 
     def timerange(a):
         # Compute begin: we consider that a.created is more trusted
@@ -127,13 +129,20 @@ def export_view(request, group=None, **kw):
         duration = long((a.end - a.begin).total_seconds())
         begin = max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
         end = begin + max(duration, 30)
-        return "%d-%d" % (begin, end)
+        if advene:
+            return "%d %d" % (1000 * begin, 1000 * end)
+        else:
+            return "%d-%d" % (begin, end)
+
+    def isvalid(a):
+        return a.created > t0
 
     response = HttpResponse(mimetype='text/plain; charset=utf-8')
     response.write("\n".join("%s [%s] %s" % (
         timerange(a),
         ",".join(cleanup(m) for m in (a.category, a.creator) if m),
-        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs.exclude(category='admin'))
+        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs.exclude(category='admin')
+                             if isvalid(a))
                    )
     return response
 
