@@ -63,13 +63,13 @@ class AnnotationAdmin(admin.ModelAdmin):
         models.CharField: {'widget': TextInput(attrs={'size': '20'})},
         models.TextField: {'widget': Textarea(attrs={'rows': '2', 'cols': '20'})},
     }
-    list_display = ('pk', 'group', 'creator', 'data', 'category', 'begin', 'end', 'created')
+    list_display = ( 'uuid', 'group', 'creator', 'creatoruuid', 'data', 'category', 'begin', 'end', 'created')
     list_editable = ( 'creator', 'data', 'category', 'group')
-    list_filter = ( 'group', 'creator', 'category', 'created', 'begin' )
+    list_filter = ( 'group', 'creator', 'creatoruuid', 'category', 'created', 'begin' )
     search_fields = [ 'data', 'creator' ]
-    exportable_fields = ('pk', 'group', 'creator', 'data', 'category', 'begin', 'end', 'created', 'source')
+    exportable_fields = ('pk', 'uuid', 'group', 'creator', 'creatoruuid', 'data', 'category', 'begin', 'end', 'created', 'source')
 
-    list_display_links = ( 'pk', )
+    list_display_links = ( 'uuid', )
     actions = ( export_model_as_csv, migrate_reference )
 
 admin.site.register(Annotation, AnnotationAdmin)

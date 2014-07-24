@@ -4,7 +4,8 @@ angular.module('mla', [
     'ngRoute',
     'ngTouch',
     'mla.controllers',
-    'mla.restServices'
+    'mla.restServices',
+    'uuid'
 ]).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/shortcut/:shortcutId', { templateUrl: '../static/partials/annotation-list.html', controller: 'AnnotationListCtrl'});

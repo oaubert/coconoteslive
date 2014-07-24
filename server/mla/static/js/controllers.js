@@ -1,8 +1,15 @@
 'use strict';
 
-angular.module('mla.controllers', [ 'LocalStorageModule' ])
-    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', '$interval', 'localStorageService',
-                                       function ($scope, $routeParams, Annotation, $interval, localStorageService) {
+angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid' ])
+    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', '$interval', 'localStorageService', 'uuid',
+                                       function ($scope, $routeParams, Annotation, $interval, localStorageService, uuid) {
+        var creatoruuid = localStorageService.get('mla-creatoruuid');
+        if (creatoruuid === null) {
+             creatoruuid = uuid.generate();
+             localStorageService.set('mla-creatoruuid', creatoruuid);
+        }
+        $scope.creatoruuid = creatoruuid;
+
         // Default value
         var name = localStorageService.get('mla-username');
         if (name === null) {
@@ -80,7 +87,8 @@ angular.module('mla.controllers', [ 'LocalStorageModule' ])
                                           begin: begin,
                                           end: end,
                                           category: category || "",
-                                          creator: creator
+                                          creator: creator,
+                                          creatoruuid: creatoruuid
                                         }
                                         ,
                                         function (response) { $scope.feedback = ""; $scope.refresh(); },

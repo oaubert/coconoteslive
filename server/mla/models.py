@@ -2,6 +2,7 @@
 
 from gettext import gettext as _
 from django.db import models
+import uuid
 
 class Group(models.Model):
     class Meta:
@@ -23,11 +24,19 @@ class Group(models.Model):
         else:
             return self.name
 
+def make_uuid():
+    return str(uuid.uuid4())
+
 class Annotation(models.Model):
     class Meta:
         verbose_name_plural = "annotations"
         verbose_name = "annotation"
         ordering = ('created', 'creator')
+
+    uuid = models.CharField(_("UUID"),
+                            unique=True,
+                            max_length=36,
+                            default=make_uuid)
 
     data = models.TextField(_('Annotation data'),
                             blank=True)
@@ -40,6 +49,10 @@ class Annotation(models.Model):
     creator = models.CharField(_("Creator"),
                                max_length=128,
                                blank=True)
+
+    creatoruuid = models.CharField(_("Creator UUID"),
+                                   max_length=36,
+                                   blank=True)
 
     begin = models.DateTimeField(_('Annotation begin'),
                                    help_text=_('Annotation begin'),
