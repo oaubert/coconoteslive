@@ -175,12 +175,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #'south',
     'rest_framework',
     'mla',
 
     'django.contrib.admin',
     'django_requestlogging',
+    'south',
 )
 
 if options.get('raven_dsn'):
