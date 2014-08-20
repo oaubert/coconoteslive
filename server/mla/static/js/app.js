@@ -3,6 +3,7 @@
 angular.module('mla', [
     'ngRoute',
     'ngTouch',
+    'ngSanitize',
     'mla.controllers',
     'mla.restServices',
     'uuid'
