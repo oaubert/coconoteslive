@@ -72,7 +72,7 @@ class AnnotationAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,      {'fields': [ ('uuid', 'creator', 'creatoruuid'), 'source' ]}),
         ("Data",    {'fields': [ ('data', 'category', 'group') ] }),
-        ("Time",    {'fields': [ ('begin', 'end') ] }),
+        ("Time",    {'fields': [ ('begin', 'end', 'created') ] }),
         ]
 
     list_display_links = ( 'uuid', )
