@@ -69,6 +69,12 @@ class AnnotationAdmin(admin.ModelAdmin):
     search_fields = [ 'data', 'creator' ]
     exportable_fields = ('pk', 'uuid', 'group', 'creator', 'creatoruuid', 'data', 'category', 'begin', 'end', 'created', 'source')
 
+    fieldsets = [
+        (None,      {'fields': [ ('uuid', 'creator', 'creatoruuid'), 'source' ]}),
+        ("Data",    {'fields': [ ('data', 'category', 'group') ] }),
+        ("Time",    {'fields': [ ('created', 'begin', 'end') ] }),
+        ]
+
     list_display_links = ( 'uuid', )
     actions = ( export_model_as_csv, migrate_reference )
 
