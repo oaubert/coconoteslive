@@ -45,6 +45,7 @@ class Annotation(models.Model):
                                    help_text=_('Annotation creation date'),
                                    null=True, editable=True,
                                    auto_now_add=True)
+    created.editable = True
 
     creator = models.CharField(_("Creator"),
                                max_length=128,
