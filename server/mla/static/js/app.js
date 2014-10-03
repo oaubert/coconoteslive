@@ -6,6 +6,7 @@ angular.module('mla', [
     'ngSanitize',
     'mla.controllers',
     'mla.restServices',
+    'FBAngular',
     'uuid'
 ]).
 config(['$routeProvider', function ($routeProvider) {

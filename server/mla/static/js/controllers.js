@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid' ])
-    .controller('AnnotationListCtrl', ['$scope', '$routeParams', 'Annotation', '$interval', 'localStorageService', 'uuid',
-                                       function ($scope, $routeParams, Annotation, $interval, localStorageService, uuid) {
+angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid', 'FBAngular' ])
+    .controller('AnnotationListCtrl', ['$scope', '$routeParams', '$location', 'Annotation', '$interval', 'localStorageService', 'uuid', 'Fullscreen',
+                                       function ($scope, $routeParams, $location, Annotation, $interval, localStorageService, uuid, Fullscreen) {
         var creatoruuid = localStorageService.get('mla-creatoruuid');
         if (creatoruuid === null) {
              creatoruuid = uuid.generate();
@@ -26,7 +26,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid' ])
         $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
 
         $scope.refresh = function() {
-            Annotation.query({}, 
+            Annotation.query({},
                              function () { },
                              function () { $scope.feedback = "Network trouble"; }
                             ).$then( function (response) {
@@ -120,6 +120,14 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid' ])
             $scope.shortcutid = $scope.shortcut_keys[index];
             $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
             $scope.refresh();
+        };
+
+        $scope.toggle_fullscreen = function () {
+            console.log("toggle fullscreen");
+            if (Fullscreen.isEnabled())
+                Fullscreen.cancel();
+            else
+                Fullscreen.all();
         };
 
         $scope.refresh();
