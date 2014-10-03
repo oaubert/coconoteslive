@@ -124,7 +124,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid' ])
 
         $scope.refresh();
 
-        $interval($scope.refresh, 30000);
+        $interval($scope.refresh, 15000);
 
     }])
     .controller('AnnotationDetailCtrl', ['$scope', '$routeParams', 'Annotation', function ($scope, $routeParams, Annotation) {
