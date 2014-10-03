@@ -20,6 +20,7 @@
     height: 70%;
     overflow-y: hidden;
     background-color: #dfe2e2;
+    border: none;
 }
 
 .list > li, .list > li:nth-of-type(1) {
