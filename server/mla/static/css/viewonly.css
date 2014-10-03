@@ -1,0 +1,37 @@
+.main {
+    max-width: 100%;
+    width: 80%;
+}
+
+.topcoat-navigation-bar {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.entry-bar {
+    display: none;
+}
+
+.topcoat-list__container {
+    border: none;
+}
+
+.topcoat-list {
+    height: 70%;
+    overflow-y: hidden;
+    background-color: #dfe2e2;
+}
+
+.list > li, .list > li:nth-of-type(1) {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1em;
+}
+
+.main {
+    border: none;
+}
+
+.annotation-data {
+    font-size: 120%;
+}

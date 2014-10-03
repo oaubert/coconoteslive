@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href="../static/topcoat/css/topcoat-mobile-light.min.css" rel="stylesheet">
     <link href="../static/css/styles.css" rel="stylesheet">
+    {% if viewonly %}
+    <link href="../static/css/viewonly.css" rel="stylesheet">
+    {% endif %}
     <style type="text/css" rel="stylesheet">
       {{ customcss }}
     </style>
@@ -26,6 +29,7 @@
   <script src="../static/lib/angular-sanitize.min.js"></script>
   <script src="../static/lib/angular-local-storage.js"></script>
   <script src="../static/lib/angular-uuid.js"></script>
+  <script src="../static/lib/angular-fullscreen.js"></script>
   <script src="../static/js/app.js"></script>
   <script src="../static/js/controllers.js"></script>
   <script src="../static/js/rest-services.js"></script>
