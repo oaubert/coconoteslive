@@ -25,9 +25,31 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid', 'FBAngular' ])
         $scope.shortcutid = $routeParams.shortcutId || document.getElementsByTagName('body')[0].dataset.shortcut || "basic";
         $scope.shortcuts = window.coconotes_shortcuts[$scope.shortcutid] || [];
 
+        $scope.annotations = [];
+        $scope.buffered_annotations = [];
+
         $scope.refresh = function() {
             Annotation.query({},
-                             function () { },
+                             function () { 
+                                 $scope.feedback = "";
+                                 if ($scope.buffered_annotations.length) {
+                                     // There are some unsaved
+                                     // annotations. Try to resend them
+                                     // now that we know we have some
+                                     // connectivity.
+                                     var newbuf = [];
+                                     $scope.buffered_annotations.map( function (anndata) {
+                                         Annotation.append(anndata,
+                                                       function (response) { },
+                                                           function (reponse) { 
+                                                               // Errors again...
+                                                               $scope.feedback = "Network trouble";
+                                                               newbuf.push(anndata); });
+                                     });
+                                     $scope.buffered_annotations = newbuf;
+                                     // Trigger another refresh
+                                     window.setTimeout($scope.refresh, 1000);
+                                 }},
                              function () { $scope.feedback = "Network trouble"; }
                             ).$then( function (response) {
                 if (response === undefined)
@@ -83,16 +105,17 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid', 'FBAngular' ])
                     data = l.slice(1).join(":").trim();
                 }
             }
-            var ann = Annotation.append({ data: data,
-                                          begin: begin,
-                                          end: end,
-                                          category: category || "",
-                                          creator: creator,
-                                          creatoruuid: creatoruuid
-                                        }
-                                        ,
+            var anndata = { data: data,
+                            begin: begin,
+                            end: end,
+                            category: category || "",
+                            creator: creator,
+                            creatoruuid: creatoruuid
+                          };
+            var ann = Annotation.append(anndata,
                                         function (response) { $scope.feedback = ""; $scope.refresh(); },
-                                        function (reponse) { $scope.feedback = "Network trouble"; });
+                                        function (reponse) { $scope.feedback = "Network trouble";
+                                                             $scope.buffered_annotations.push(anndata); });
             // Immediately update displayed list (optimistic view, there should be no error)
             ann.uploading = true;
             $scope.annotations.push(ann);
