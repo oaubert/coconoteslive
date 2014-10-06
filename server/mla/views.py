@@ -61,7 +61,7 @@ def group_view(request, group=None, shortcut=None, **kw):
             'message': 'Group %s does not exist.' % group,
             })
 
-    if 'filter' in request.GET and Shortcut.objects.filter(identifier=request.GET['filter']).count():
+    if 'filter' in request.GET:
         filteredcss = """.topcoat-list__item.category-%s {
 display: list-item;
 }
