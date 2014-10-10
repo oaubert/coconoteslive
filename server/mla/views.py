@@ -61,7 +61,7 @@ def group_view(request, group=None, shortcut=None, **kw):
             'message': 'Group %s does not exist.' % group,
             })
 
-    if not shortcut and group == 'unires':
+    if not shortcut and group.startswith('unires'):
         shortcut = 'Unires'
 
     if 'filter' in request.GET:
