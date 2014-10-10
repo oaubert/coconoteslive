@@ -121,6 +121,7 @@ def export_view(request, group=None, **kw):
             'label': 'Error',
             'message': 'No message in group %s.' % group,
             })
+    absolute = request.GET.get('absolute', False)
     t0 = request.GET.get('t0', None)
     if t0 is None:
         # Use first value
@@ -141,6 +142,8 @@ def export_view(request, group=None, **kw):
         # than a.end, so use it as a reference (for end time),
         # considering that transmission time is negligible.
         # We substract the annotation duration to get the annotation begin
+        if absolute:
+            return unicode(a.created)
         duration = long((a.end - a.begin).total_seconds())
         begin = max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
         end = begin + max(duration, 30)
