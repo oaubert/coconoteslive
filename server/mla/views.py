@@ -159,7 +159,7 @@ def export_view(request, group=None, **kw):
     response.write("\n".join("%s [%s] %s" % (
         timerange(a),
         ",".join(cleanup(m) for m in (a.category, a.creator) if m),
-        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs.exclude(category='admin')
+        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs
                              if isvalid(a))
                    )
     return response
