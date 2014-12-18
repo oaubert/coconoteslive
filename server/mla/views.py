@@ -61,8 +61,8 @@ def group_view(request, group=None, shortcut=None, **kw):
             'message': 'Group %s does not exist.' % group,
             })
 
-    if not shortcut and group.startswith('unires'):
-        shortcut = 'Unires'
+    if not shortcut:
+        shortcut = 'numaddict'
 
     if 'filter' in request.GET:
         filteredcss = """.topcoat-list__item.category-%s {
