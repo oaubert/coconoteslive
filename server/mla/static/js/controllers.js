@@ -97,13 +97,9 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid', 'FBAngular' ])
             $scope.annotation = "";
             $scope.begin_timestamp = null;
 
-            if (! category && data.indexOf(':') > 0) {
-                var l = data.split(':');
-                var cat = l[0].trim();
-                if (cat != 'http' && cat != 'https' && cat.indexOf(" ") < 0) {
-                    category = cat;
-                    data = l.slice(1).join(":").trim();
-                }
+            if (! category && data.match(/(\s|^)#\w+/)) {
+                var m = data.match(/(\s|^)#(\w+)/);
+                category = m[2].trim();
             }
             var anndata = { data: data,
                             begin: begin,
