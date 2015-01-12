@@ -167,12 +167,34 @@ def export_view(request, group=None, **kw):
     def isvalid(a):
         return a.created > t0
 
-    response = HttpResponse(mimetype='text/plain; charset=utf-8')
-    response.write("\n".join("%s [%s] %s" % (
-        timerange(a),
-        ",".join(cleanup(m) for m in (a.category, a.creator) if m),
-        (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs
-                             if isvalid(a))
+    if form == 'json':
+        response = HttpResponse(content_type='application/json')
+        response.write(json.dumps([
+            {    "begin": get_begin(a),
+                 "end": get_end(a),
+                 "tags": [],
+                 "media": request.GET.get("media", group),
+                 "content": {
+                     "description": a.data.strip(),
+                     "title": a.data.strip().split("\n")[0]
+                },
+                 "meta": {
+                     "dc:contributor": a.creator,
+                     "dc:created": a.created.isoformat(),
+                     "dc:modified": a.created.isoformat(),
+                     "dc:creator": a.creator
+                 },
+                 "type_title": request.GET.get("type_title", "Contributions"),
+                 "type": request.GET.get("type", "Contributions"),
+                 "id": a.uuid
+             }
+            for a in qs if isvalid(a) ], indent=2))
+    else:
+        response = HttpResponse(content_type='text/plain; charset=utf-8')
+        response.write("\n".join("%s [%s] %s" % (
+            timerange(a),
+            ",".join(cleanup(m) for m in (a.category, a.creator) if m),
+            (a.data.strip().replace("\n", " ") or cleanup(a.category) or "(empty)")) for a in qs
+                                 if isvalid(a))
                    )
     return response
-
