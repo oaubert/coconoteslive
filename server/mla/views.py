@@ -138,16 +138,27 @@ def export_view(request, group=None, **kw):
         # Hackish way of specifying tzinfo
         t0 = t0.replace('tzinfo', qs[0].created.tzinfo)
 
-    def timerange(a):
+    def get_begin(a):
+        """Return begin time in seconds.
+        """
         # Compute begin: we consider that a.created is more trusted
         # than a.end, so use it as a reference (for end time),
         # considering that transmission time is negligible.
         # We substract the annotation duration to get the annotation begin
+        duration = long((a.end - a.begin).total_seconds())
+        return max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
+
+    def get_end(a):
+        """Return end time in seconds.
+        """
+        duration = long((a.end - a.begin).total_seconds())
+        return get_begin(a) + max(duration, 30)
+
+    def timerange(a):
         if absolute:
             return unicode(a.created)
-        duration = long((a.end - a.begin).total_seconds())
-        begin = max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
-        end = begin + max(duration, 30)
+        begin = get_begin(a)
+        end = get_end(a)
         if advene:
             return "%d %d" % (1000 * begin, 1000 * end)
         else:
