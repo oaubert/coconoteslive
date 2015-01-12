@@ -185,7 +185,7 @@ def export_view(request, group=None, **kw):
                      "dc:creator": a.creator
                  },
                  "type_title": request.GET.get("type_title", "Contributions"),
-                 "type": request.GET.get("type", "Contributions"),
+                 "type": request.GET.get("type", "public_contribution"),
                  "id": a.uuid
              }
             for a in qs if isvalid(a) ], indent=2))
