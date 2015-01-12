@@ -170,8 +170,8 @@ def export_view(request, group=None, **kw):
     if form == 'json':
         response = HttpResponse(content_type='application/json')
         response.write(json.dumps([
-            {    "begin": get_begin(a),
-                 "end": get_end(a),
+            {    "begin": 1000 * get_begin(a),
+                 "end": 1000 * get_end(a),
                  "tags": [],
                  "media": request.GET.get("media", group),
                  "content": {
