@@ -102,7 +102,7 @@ def sync_view(request, group=None, **kw):
     a.begin = datetime.datetime.now()
     a.end = a.begin
     a.save()
-    response = HttpResponse(mimetype='text/plain; charset=utf-8')
+    response = HttpResponse(content_type='text/plain; charset=utf-8')
     response.write("OK %s %s" % (action, unicode(a.created)))
     return response
 
@@ -111,6 +111,7 @@ def export_view(request, group=None, **kw):
         return re.subn("[^-a-zA-Z0-9_]", "_", m.strip())[0]
 
     advene = request.GET.get('advene', None)
+    form = request.GET.get('format', 'text')
 
     if group is None:
         qs = Annotation.objects.order_by('created')
