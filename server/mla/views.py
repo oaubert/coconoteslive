@@ -184,8 +184,8 @@ def export_view(request, group=None, **kw):
                      "dc:modified": a.created.isoformat(),
                      "dc:creator": a.creator
                  },
-                 "type_title": request.GET.get("type_title", "Contributions"),
-                 "type": request.GET.get("type", "public_contribution"),
+                 "type_title": request.GET.get("type_title", "LiveContribution"),
+                 "type": request.GET.get("type", "live_contribution"),
                  "id": a.uuid
              }
             for a in qs if isvalid(a) ], indent=2))
