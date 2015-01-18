@@ -65,7 +65,7 @@ class AnnotationAdmin(admin.ModelAdmin):
     }
     list_display = ( 'uuid', 'group', 'creator', 'creatoruuid', 'data', 'category', 'begin', 'end', 'created')
     list_editable = ( 'creator', 'data', 'category', 'group')
-    list_filter = ( 'group', 'creator', 'creatoruuid', 'category', 'created', 'begin' )
+    list_filter = ( 'group', 'creator', 'category', 'created', 'begin' )
     search_fields = [ 'data', 'creator' ]
     exportable_fields = ('pk', 'uuid', 'group', 'creator', 'creatoruuid', 'data', 'category', 'begin', 'end', 'created', 'source')
 
