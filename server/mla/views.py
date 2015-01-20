@@ -168,7 +168,7 @@ def export_view(request, group=None, **kw):
             return "%d-%d" % (begin, end)
 
     def isvalid(a):
-        return a.created > t0
+        return a.created >= t0
 
     if form == 'json':
         response = HttpResponse(content_type='application/json')
