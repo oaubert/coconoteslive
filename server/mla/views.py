@@ -124,6 +124,9 @@ def export_view(request, group=None, **kw):
             })
     absolute = request.GET.get('absolute', False)
     t0 = request.GET.get('t0', None)
+    # Offset applied additionally to the default t0
+    adjust = long(request.GET.get('adjust', 0))
+
     if t0 is None:
         # Use first value
         refs = qs.filter(data__contains='START', category='admin')
@@ -146,7 +149,7 @@ def export_view(request, group=None, **kw):
         # considering that transmission time is negligible.
         # We substract the annotation duration to get the annotation begin
         duration = long((a.end - a.begin).total_seconds())
-        return max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME)
+        return max(0, long((a.created - t0).total_seconds()) - duration - REACTIONTIME + adjust)
 
     def get_end(a):
         """Return end time in seconds.
