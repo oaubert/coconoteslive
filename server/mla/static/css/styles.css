@@ -384,6 +384,7 @@ ul {
 }
 
 .shortcut-nav {
+    display: none;
     background-color: #dfe2e2;
     position: absolute;
     top: 70px;
