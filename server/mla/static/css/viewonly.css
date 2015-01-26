@@ -19,7 +19,7 @@
 .topcoat-list {
     height: 70%;
     overflow-y: hidden;
-    background-color: #dfe2e2;
+    background-color: #fff;
     border: none;
 }
 
@@ -27,6 +27,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 1em;
+    box-shadow: #ddd 2px 2px 2px;
 }
 
 .main {
@@ -34,5 +35,5 @@
 }
 
 .annotation-data {
-    font-size: 120%;
+    font-size: 180%;
 }
