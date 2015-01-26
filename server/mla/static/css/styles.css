@@ -114,6 +114,7 @@ html, body {
     /* Hackish fix for inconsistent line-height behaviour between chrome/webkit and firefox */
     min-height: 56px;
     line-height: 56px;
+    border-radius: 0px;
 }
 
 a {
@@ -332,7 +333,7 @@ ul {
     margin-top: 2px;
     border: 1px solid grey;
     border-radius: 3px;
-    background-color: #ccf;
+    background-color: #f6f6ff;
 }
 
 .uploading {
@@ -423,7 +424,7 @@ ul {
 }
 
 .shortcut-bar input {
-    background-color: #fff;
+    background-color: #fff !important;
     border-radius: 3px;
     margin: 2px;
     -webkit-appearance: none;
