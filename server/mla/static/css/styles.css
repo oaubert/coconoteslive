@@ -421,3 +421,9 @@ ul {
     height: 70px;
     background-color: #fff;
 }
+
+.shortcut-bar input {
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 2px;
+}
