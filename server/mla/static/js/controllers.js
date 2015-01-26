@@ -27,6 +27,7 @@ angular.module('mla.controllers', [ 'LocalStorageModule', 'uuid', 'FBAngular' ])
 
         $scope.annotations = [];
         $scope.buffered_annotations = [];
+        $scope.hasFilter = document.location.search.indexOf('filter=') > 0 ? "on" : "off";
 
         $scope.refresh = function() {
             Annotation.query({},
