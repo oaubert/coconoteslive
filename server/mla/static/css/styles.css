@@ -426,4 +426,7 @@ ul {
     background-color: #fff;
     border-radius: 3px;
     margin: 2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;    
 }
