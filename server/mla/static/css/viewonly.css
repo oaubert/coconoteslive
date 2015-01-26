@@ -37,3 +37,7 @@
 .annotation-data {
     font-size: 180%;
 }
+
+.username {
+    display: none;
+}
