@@ -2,6 +2,7 @@ from .models import Annotation, Group, Shortcut
 
 import re
 import datetime
+from dateutil.relativedelta import relativedelta
 import time
 import json
 import itertools
@@ -124,14 +125,20 @@ def export_view(request, group=None, **kw):
             })
     absolute = request.GET.get('absolute', False)
     t0 = request.GET.get('t0', None)
-    # Offset applied additionally to the default t0
+    # Offset (in seconds) applied additionally to the default t0
     adjust = long(request.GET.get('adjust', 0))
 
     if t0 is None:
-        # Use first value
-        refs = qs.filter(data__contains='START', category='admin')
+        # Use first value or first REFTIME value
+        refs = qs.filter(data__contains='REFTIME')
         if refs.count():
+            # REFTIME is expected to contain a timestamp in the form
+            # mm:ss matching the position of the annotation in the recording.
             t0 = refs[0].created
+            l = re.findall("REFTIME=([0-9]+:[0-9]+)", refs[0].data)
+            if l:
+                (minutes, seconds) = [ int(i) for i in l[0].split(':') ]
+                t0 = t0 + relativedelta(minutes=-minutes, seconds=-seconds)
         else:
             # Fallback on first annotation
             t0 = qs[0].created
