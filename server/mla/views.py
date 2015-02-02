@@ -76,7 +76,7 @@ display: none;
         filteredcss = ""
     return render_to_response('client.html', {
         'filter': request.GET.get('filter', ''),
-        'group': group,
+        'group': g,
         'shortcut': shortcut,
         'customcss': filteredcss + "\n" + "\n".join(".category-%(identifier)s .annotation-category, .category-button.category-%(identifier)s { background-color: %(color)s }" % s.__dict__
                                                     for s in Shortcut.objects.exclude(color="")),
