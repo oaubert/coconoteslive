@@ -157,7 +157,8 @@ a {
     position: relative;
     clear: both;
     padding: 2px 1em;
-    margin: 0px;
+    border: 1px solid #808080;
+    box-shadow: #777 2px 2px 2px;    
 }
 
 .list > li:nth-of-type(1) {
@@ -385,7 +386,6 @@ ul {
 }
 
 .shortcut-nav {
-    display: none;
     background-color: #fff;
     position: absolute;
     top: 70px;
